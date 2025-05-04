@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monty Hall Problemi</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .doors {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .door {
+            width: 80px;
+            height: 120px;
+            background-image: url('door.png');
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            cursor: pointer;
+        }
+        button, input {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Monty Hall Yarışmasına Hoş Geldiniz!</h1>
+    
+    <p>Bir kapı seçin:</p>
+    <div class="doors">
+        <div class="door" id="door1" onclick="chooseDoor(1)"></div>
+        <div class="door" id="door2" onclick="chooseDoor(2)"></div>
+        <div class="door" id="door3" onclick="chooseDoor(3)"></div>
+    </div>
+    <p id="message"></p>
+    <button id="switchButton" onclick="switchDoor()" style="display:none;">Kapıyı Değiştir</button>
+    <button id="stayButton" onclick="revealResult(false)" style="display:none;">Aynı Kapıyı Tut</button>
+    <button id="restartButton" onclick="restartGame()" style="display:none;">Tekrar Oyna</button>
+
+    <script>
+        let doors = ["goat", "goat", "car"];
+        let selectedDoor = null;
+        let revealedDoor = null;
+        let gameStage = 0;
+
+        function shuffleDoors() {
+            doors.sort(() => Math.random() - 0.5);
+        }
+        
+        function chooseDoor(doorIndex) {
+            if (gameStage !== 0) return;
+            selectedDoor = doorIndex;
+            document.getElementById("message").innerText = "Ben bir keçi olan kapıyı açıyorum...";
+            setTimeout(() => {
+                do {
+                    revealedDoor = Math.floor(Math.random() * 3);
+                } while (revealedDoor === selectedDoor - 1 || doors[revealedDoor] === "car");
+                document.getElementById(`door${revealedDoor + 1}`).style.backgroundImage = "url('goat.png')";
+                document.getElementById("message").innerText = "Kapınızı değiştirmek ister misiniz?";
+                document.getElementById("switchButton").style.display = "inline";
+                document.getElementById("stayButton").style.display = "inline";
+                gameStage = 1;
+            }, 1000);
+        }
+
+        function switchDoor() {
+            let newChoice;
+            do {
+                newChoice = Math.floor(Math.random() * 3);
+            } while (newChoice === selectedDoor - 1 || newChoice === revealedDoor);
+            selectedDoor = newChoice + 1;
+            revealResult(true);
+        }
+
+        function revealResult(didSwitch) {
+            document.getElementById(`door${selectedDoor}`).style.backgroundImage = doors[selectedDoor - 1] === "car" ? "url('car.png')" : "url('goat.png')";
+            document.getElementById("message").innerText = doors[selectedDoor - 1] === "car" ? "Tebrikler, Ferrari kazandınız!" : "Üzgünüm, keçi kazandınız.";
+            document.getElementById("switchButton").style.display = "none";
+            document.getElementById("stayButton").style.display = "none";
+            document.getElementById("restartButton").style.display = "inline";
+        }
+
+        function restartGame() {
+            shuffleDoors();
+            document.getElementById("message").innerText = "Bir kapı seçin:";
+            document.getElementById("switchButton").style.display = "none";
+            document.getElementById("stayButton").style.display = "none";
+            document.getElementById("restartButton").style.display = "none";
+            for (let i = 1; i <= 3; i++) {
+                document.getElementById(`door${i}`).style.backgroundImage = "url('door.png')";
+            }
+            gameStage = 0;
+        }
+
+        shuffleDoors();
+    </script>
+</body>
+</html>
