@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -110,3 +111,220 @@
     </script>
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monty Hall Problemi</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .doors {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .door {
+            width: 100px;
+            height: 150px;
+            background-image: url('door.png');
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            cursor: pointer;
+        }
+        #host {
+            width: 150px;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #statistics {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        #info-section {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        #info-section h2 {
+            color: #333;
+        }
+        #info-section p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Let's Make a Deal Yarışma Programına Hoş Geldiniz!</h1>
+    <img id="host" src="host.png" alt="Sunucu">
+    <p>Ben sunucunuz Monty Hall. Kapıların arkasında bir Ferrari ve iki keçi var. Bir kapı seçin!</p>
+    
+    <div class="doors">
+        <div class="door" id="door0" onclick="chooseDoor(0)"></div>
+        <div class="door" id="door1" onclick="chooseDoor(1)"></div>
+        <div class="door" id="door2" onclick="chooseDoor(2)"></div>
+    </div>
+
+    <p id="message"></p>
+    <button id="switchButton" onclick="switchDoor()" style="display:none;">Kapıyı Değiştir</button>
+    <button id="stayButton" onclick="revealResult(false)" style="display:none;">Aynı Kapıyı Tut</button>
+    <button id="restartButton" onclick="restartGame()" style="display:none;">Tekrar Oyna</button>
+
+    <div id="statistics" style="display:none;">
+        <p>Kapıyı Değiştirerek Kazanma Oranı: <span id="switchWinRate">0%</span></p>
+        <p>Kapıyı Değiştirmeyerek Kazanma Oranı: <span id="stayWinRate">0%</span></p>
+        <p>Toplam Oyun Sayısı: <span id="totalGames">0</span></p>
+    </div>
+
+    <!-- Monty Hall Bilgi Bölümü -->
+<div id="info-section">
+    <h2>Monty Hall Problemi Hakkında</h2>
+    <p>Let’s Make a Deal, Amerika Birleşik Devletleri’nde yayınlanmaya başlanan ve ve dünya çapında birçok ülkede uyarlaması yapılan bir yarışma programıdır. Şovun ilk ve en ünlü versiyonu 1963-1976 yılları arasında yayınlanmıştır. Sonraki bazı yıllarda da tekrar yayınlanıp tekrar sonlanmıştır. Let’s Make a Deal programının en ünlü ve ilk sunucularından biri olan Monty Hall’un ismi bu probleme verilmiştir. Problem aslında basit ama kafa karıştırıcı bir matematiksel olasılık sorusudur. Bu problemde üç kapı vardır ve bu kapıların ikisinin arkasında kötü ve ucuz bir ödül olan keçi vardır fakat diğer kapının arkasında büyük ödül olan herhangi bir araba vardır.</p>
+    
+    <p>Yarışmanın sunucusu hangi kapının arkasında araba ve hangilerinin arkasında keçi olduğunu bilmektedir. Başta yarışmacıya bir seçme hakkı verilir ve yarışmacı bir kapıyı seçer, ardından sunucu yarışmacıya kolaylık olması için bir kapıyı açar ve o kapıdan her zaman keçi çıkmaktadır. Ardından yarışmacıya tekrar bir seçme hakkı verilmektedir. Yarışmacı ilk başta seçtiği kapıda kalabilir veya kalan diğer kapıyı seçebilir. Son olarak yarışmacı kapının arkasında çıkan ödülü almaktadır.</p>
+
+    <p>Monty Hall Problemi, olasılık kuramı içerisinde dikkat çeken ve geniş çapta tartışmalara yol açan klasik bir problemdir. Bu problemin kamuoyunda yaygın şekilde tanınması, 1991 yılına uzanmaktadır. 21 Temmuz 1991 tarihinde The New York Times gazetesinde John Tierney tarafından kaleme alınan bir yazıda, Monty Hall yarışmasında kapıyı değiştirme seçeneğinin kazanma olasılığını artırdığı öne sürülmüştür (Tierney, 1991). Aynı yılın Eylül ayında ise, gazetenin köşe yazarlarından Marilyn vos Savant’a “Ask Marilyn” adlı köşesine yöneltilen bir soru aracılığıyla konu daha da geniş kitlelere ulaşmıştır. Vos Savant’ın çözümü kamuoyuyla paylaşması üzerine, ABD genelinde 10.000’den fazla okur görüş bildirmiştir (vos Savant, 1991).</p>
+
+    <p>Cevapların büyük bir kısmı, karar değiştirmenin kazanma şansı üzerinde etkili olmadığı yönündedir. Bu yaklaşım, insan sezgilerinin olasılık analizleriyle zaman zaman çelişebileceğini göstermektedir. Ancak yapılan matematiksel analizler, kapıyı değiştiren yarışmacının kazanma olasılığının 1/3’ten 2/3’e yükseldiğini ortaya koymuş; bu da karar değiştirmenin kazanma şansını iki katına çıkardığını göstermiştir (Rosenhouse, 2009).</p>
+
+    <p>İlk etapta bu sonuca karşı çıkanlar arasında ünlü matematikçi Paul Erdős gibi saygın isimler de bulunmaktaydı. Ancak konu üzerine yapılan kapsamlı açıklamalar, simülasyonlar ve deneysel veriler sonucunda, bu isimler de çözümün doğruluğunu kabul etmiştir.</p>
+
+    <p>Monty Hall Problemi, günümüzde de özellikle olasılık kuramının sezgilere aykırı yönlerini göstermek amacıyla sıkça başvurulan, eğitici ve düşündürücü bir örnek olmaya devam etmektedir.</p>
+
+    <p>İlk bakışta sona kalan iki kapıdan araba kazanma olasılığı 1/2’den %50 olarak sanılmaktadır fakat öyle değildir. İlk seçtiğimiz kapıdan araba kazanma olasılığı 1/3’ten yaklaşık olarak %33,3 iken sona kalan diğer kapıdan araba kazanma olasılığı 2/3’ten yaklaşık olarak %66,7’dir. Çünkü ilk başta üç kapı varken her kapıdan araba çıkma olasılığı yaklaşık %33,3’tür. Yani bizim ilk başta seçtiğimiz kapıdan araba çıkma olasılığı yaklaşık %33,3’tür ve kalan iki kapıdan araba çıkma olasılığı yaklaşık %66,7’dir. Sunucu kalan iki kapıdan kesinlikle keçi olan kapıyı açacaktır. Bu yüzden yarışmacının ilk başta seçtiği kapıdan araba kazanma olasılığı yaklaşık %33,3 iken sona kalan diğer kapıdan araba kazanma olasılığı yaklaşık %66,7’dir. Yani sunucu keçi olan kapıyı açtıktan sonra yarışmacı seçtiği kapıyı değiştirse şansı ikiye katlanmaktadır.</p>
+    <h3>Problemin Açıklanması</h3>
+<div style="display: flex; flex-direction: column; align-items: center; margin-top: 1em;">
+    <img src="monty-hall-tablosu.png" alt="Monty Hall Problemi bütün olasılıklar" style="max-width: 100%; height: auto; border: 1px solid #ccc; padding: 5px;">
+    <p style="max-width: 700px; text-align: justify; margin-top: 1em;">
+        Problemde kapıyı değiştirince şansın artmasını ispatlamanın birden fazla yolu vardır. 
+        En kolay yollarından biri de tüm olasılıklara teker teker bakmaktır. 
+        Görseldeki ilk duruma bakıldığında ödülün 1. kapının arkasında olduğunu, kapıyı değiştirince kaybedildiği, değiştirmeyince ise kazanıldığı görülmektedir. 
+        2. durumda kapıyı değiştirince kazanılır, değiştirmeyince ise kaybedilir. 
+        3. durumda yine kapıyı değiştirince kazanılır. 
+        Bu 3 durumdan ikisinde kapı değiştirildiğinde ödül kazanılırken, birinde kapı değiştirilmediğinde ödül kazanılır. 
+        Yani kapıyı değiştirince kazanma oranı %66 iken değiştirmeyince kazanma oranı %33’tür. 
+        9. duruma kadar sonuç böyle devam etmektedir.
+    </p>
+</div>
+    <h3>Bayes Teoremiyle Problemin Açıklanması</h3>
+    <p>Bayes teoremi, 18. yüzyılda yaşamış İngiliz matematikçi Thomas Bayes’in adını taşıyan, koşullu olasılığı belirlemek için kullanılan matematiksel bir formüldür. Koşullu olasılık, benzer koşullarda önceki bir sonuca dayanarak bir sonucun ortaya çıkma olasılığıdır. Bayes Teoremi, yeni veya ek kanıtlar verildiğinde mevcut tahminleri veya teorileri revize etmenin (olasılıkları güncellemenin) bir yolunu sağlamaktadır.</p>
+
+    <p>Bayes teoremine göre, belirli bir koşul gerçekleştikten sonra bir olayın olasılığı şu şekilde hesaplanır: <br>
+    <code>P(A|B) = (P(B|A) × P(A)) / P(B)</code></p>
+
+    <p>P(A), A olayının gerçekleşme olasılığı ve P(B) B olayının gerçekleşme olasılığını ifade etmektedir. P(A|B) B olayı gerçekleştiğinde A olayının gerçekleşme olasılığı iken P(B|A) ise A olayı gerçekleştiğinde B olayının gerçekleşme olasılığıdır.</p>
+
+    <p>Bu problemde P(A), yarışmacının yarışmanın başında seçtiği kapının arkasında araba olma ihtimalidir. Yarışma başında üç kapı olduğu için ve yarışmacı tamamen rastgele bir şekilde kapı seçtiği için ihtimal 1/3 (%33,33…)’tür. P(B) ise sunucunun arkasında keçi olan bir kapıyı açma ihtimalidir. Sunucu hangi kapının arkasında araba olduğunu bildiği için ve yarışmanın doğru bir şekilde ilerlemesi için her zaman kesinlikle arkasında keçi olan kapıyı açacaktır. Yani P(B) = 1 (%100) olmaktadır. P(B|A), yarışmacının yarışma başında kapı seçtikten sonra sunucunun arkasında keçi olan kapıyı açma ihtimali yani 1’dir.</p>
+
+    <p>Bu durumda  <code>P(A|B) = (1 × 1/3) / 1 = 1/3</code> olur. Bu sonuç, yarışmacının ilk seçtiği kapıda arabanın bulunma olasılığının değişmediğini, hâlâ 1/3 olduğunu gösterir. Buna karşılık, diğer kapılardan birinde arabanın bulunma olasılığı 2/3’tür ve sunucu arkasında keçi bulunan kapıyı açarak bu ihtimali tek bir kapıya düşürmüştür. Bu nedenle, yarışmacı kapısını değiştirirse kazanma şansı 2/3, yani yaklaşık %66 olurken kapıyı değiştirmezse kazanma şansı sadece 1/3, yani yaklaşık %33 olarak kalır.</p>
+</div>
+
+
+    <script>
+        let doors = ["goat", "goat", "car"];
+        let selectedDoor = null;
+        let revealedDoor = null;
+        let gameStage = 0;
+        
+        let switchWins = 0;
+        let stayWins = 0;
+        let totalGames = 0;
+
+        function shuffleDoors() {
+            doors.sort(() => Math.random() - 0.5);
+        }
+
+        function chooseDoor(doorIndex) {
+            if (gameStage !== 0) return;
+            selectedDoor = doorIndex;
+            document.getElementById("message").innerText = "Ben bir keçi olan kapıyı açıyorum...";
+            
+            setTimeout(() => {
+                do {
+                    revealedDoor = Math.floor(Math.random() * 3);
+                } while (revealedDoor === selectedDoor || doors[revealedDoor] === "car");
+
+                document.getElementById(`door${revealedDoor}`).style.backgroundImage = "url('goat.png')";
+                document.getElementById("message").innerText = "Kapınızı değiştirmek ister misiniz?";
+                
+                document.getElementById("switchButton").style.display = "inline";
+                document.getElementById("stayButton").style.display = "inline";
+                gameStage = 1;
+            }, 1000);
+        }
+
+        function switchDoor() {
+            selectedDoor = [0, 1, 2].find(d => d !== selectedDoor && d !== revealedDoor);
+            revealResult(true);
+        }
+
+        function revealResult(didSwitch) {
+            document.getElementById(`door${selectedDoor}`).style.backgroundImage = doors[selectedDoor] === "car" ? "url('car.png')" : "url('goat.png')";
+            const win = doors[selectedDoor] === "car";
+            if (didSwitch) {
+                if (win) switchWins++;
+            } else {
+                if (win) stayWins++;
+            }
+            totalGames++;
+            
+            updateStatistics();
+            
+            document.getElementById("message").innerText = win ? "Tebrikler, Ferrari kazandınız!" : "Üzgünüm, keçi kazandınız.";
+            document.getElementById("switchButton").style.display = "none";
+            document.getElementById("stayButton").style.display = "none";
+            document.getElementById("restartButton").style.display = "inline";
+        }
+
+        function restartGame() {
+            shuffleDoors();
+            selectedDoor = null;
+            revealedDoor = null;
+            gameStage = 0;
+            document.getElementById("message").innerText = "Ben sunucunuz. Kapıların arkasında bir Ferrari ve iki keçi var. Bir kapı seçin!";
+            
+            for (let i = 0; i < 3; i++) {
+                document.getElementById(`door${i}`).style.backgroundImage = "url('door.png')";
+            }
+            document.getElementById("switchButton").style.display = "none";
+            document.getElementById("stayButton").style.display = "none";
+            document.getElementById("restartButton").style.display = "none";
+        }
+
+        function updateStatistics() {
+            const switchWinRate = ((switchWins / totalGames) * 100).toFixed(2);
+            const stayWinRate = ((stayWins / totalGames) * 100).toFixed(2);
+            const finalSwitchRate = switchWinRate;
+            const finalStayRate = (100 - finalSwitchRate).toFixed(2);
+
+            document.getElementById("switchWinRate").innerText = `${finalSwitchRate}%`;
+            document.getElementById("stayWinRate").innerText = `${finalStayRate}%`;
+            document.getElementById("totalGames").innerText = totalGames;
+            document.getElementById("statistics").style.display = "block";
+        }
+
+        shuffleDoors();
+    </script>
+</body>
+</html>
+
+>>>>>>> 376f8682c9aea1dbdd7a9950c6b6f1fc6a9e95d0
